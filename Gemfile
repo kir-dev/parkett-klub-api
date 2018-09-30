@@ -20,6 +20,10 @@ gem 'puma', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 
+gem 'faraday', '~> 0.11'
+
+gem 'jwt', '~> 1.5'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -27,6 +31,7 @@ gem 'rack-cors'
 # gem 'rack-cors'
 
 group :development, :test do
+  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end

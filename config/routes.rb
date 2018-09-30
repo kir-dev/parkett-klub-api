@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+
+  get '/users/me', to: 'users#me'
+  get '/auth/authsch', to: 'authentication#authsch', format: false
+
   resources :parties
   resources :workshops
   resources :dance_teachers
   resources :djs
   resources :dances
   resources :articles
-  resources :users
+  resources :users, :except => [:new]
   resources :members
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end
