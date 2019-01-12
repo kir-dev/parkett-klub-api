@@ -1,0 +1,2 @@
+class DanceType < ApplicationRecord
+end

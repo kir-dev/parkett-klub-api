@@ -46,6 +46,6 @@ class DancesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def dance_params
-      params.require(:dance).permit(:name, :content)
+      params.require(:dance).permit(:name, :content, :image)
     end
 end

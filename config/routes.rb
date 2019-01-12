@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :articles
   resources :users, :except => [:new]
   resources :members
+  resources :dance_types
 
 end

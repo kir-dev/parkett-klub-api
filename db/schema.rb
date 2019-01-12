@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180810150438) do
+ActiveRecord::Schema.define(version: 20190112145250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,19 @@ ActiveRecord::Schema.define(version: 20180810150438) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dance_types", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.string "image"
+  end
+
   create_table "dances", force: :cascade do |t|
     t.string   "name"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "dance_type_id"
+    t.index ["dance_type_id"], name: "index_dances_on_dance_type_id", using: :btree
   end
 
   create_table "djs", force: :cascade do |t|
@@ -52,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180810150438) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "image"
   end
 
   create_table "parties", force: :cascade do |t|
