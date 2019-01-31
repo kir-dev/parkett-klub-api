@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :update, :destroy]
+  before_action :set_member, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
 
   # GET /members
   def index

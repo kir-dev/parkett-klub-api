@@ -1,5 +1,6 @@
 class PartiesController < ApplicationController
-  before_action :set_party, only: [:show, :update, :destroy]
+  before_action :set_party, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
 
   # GET /parties
   def index

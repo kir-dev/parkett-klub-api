@@ -1,6 +1,6 @@
 class DanceTeachersController < ApplicationController
-  before_action :set_dance_teacher, only: [:show, :update, :destroy]
-
+  before_action :set_dance_teacher, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
   # GET /dance_teachers
   def index
     @dance_teachers = DanceTeacher.all

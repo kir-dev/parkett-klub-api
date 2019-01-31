@@ -1,5 +1,6 @@
 class WorkshopsController < ApplicationController
-  before_action :set_workshop, only: [:show, :update, :destroy]
+  before_action :set_workshop, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
 
   # GET /workshops
   def index

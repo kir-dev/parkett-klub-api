@@ -1,5 +1,6 @@
 class BandsController < ApplicationController
-  before_action :set_band, only: [:show, :update, :destroy]
+  before_action :set_band, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
 
   # GET /bands
   def index

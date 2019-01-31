@@ -1,5 +1,6 @@
 class DanceTypesController < ApplicationController
-  before_action :set_dance_type, only: [:show, :update, :destroy]
+  before_action :set_dance_type, only: %i[show update destroy]
+  before_action :require_admin, except: %i[index show]
 
   # GET /dance_types
   def index
