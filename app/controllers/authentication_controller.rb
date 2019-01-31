@@ -1,4 +1,3 @@
-
 class AuthenticationController < ApplicationController
   def authsch
     authenticator = Authenticator.new
@@ -6,6 +5,9 @@ class AuthenticationController < ApplicationController
 
     # Generate token
     token = TokiToki.encode(user_info[:authsch_id])
+
+    # First user will be admin
+    user_info = user_info.merge({role: 'admin'}) unless !User.count(:all).eql?(0)
 
     # create user if it doesn't exist
     User.where(authsch_id: user_info[:authsch_id]).first_or_create!(
