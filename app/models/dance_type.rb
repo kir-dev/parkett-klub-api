@@ -1,3 +1,3 @@
 class DanceType < ApplicationRecord
-  belongs_to :dance
+  has_many :dance
 end

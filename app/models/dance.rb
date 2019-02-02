@@ -1,4 +1,4 @@
 class Dance < ApplicationRecord
-  has_one :dance_type
-  validates :dance_type, presence: true
+  belongs_to :dance_type
+  validates_associated :dance_type
 end
