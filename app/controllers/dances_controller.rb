@@ -4,13 +4,10 @@ class DancesController < ApplicationController
   # GET /dances
   def index
     @dances = Dance.all
-
-    render json: @dances
   end
 
   # GET /dances/1
   def show
-    render json: @dance
   end
 
   # POST /dances
