@@ -3,4 +3,5 @@ class Dance < ApplicationRecord
   validates_associated :dance_type
 
   has_many :dance_course
+  has_many :workshop
 end

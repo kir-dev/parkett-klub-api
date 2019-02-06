@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190206144443) do
+ActiveRecord::Schema.define(version: 20190206151609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,15 +116,15 @@ ActiveRecord::Schema.define(version: 20190206144443) do
     t.datetime "end_date"
     t.text     "program"
     t.text     "content"
-    t.string   "theme"
+    t.text     "theme"
     t.string   "facebook_event"
     t.string   "application_form"
-    t.integer  "dance_id"
-    t.integer  "teacher_id"
     t.integer  "party_id"
+    t.integer  "dance_id"
+    t.integer  "dance_teacher_id"
     t.index ["dance_id"], name: "index_workshops_on_dance_id", using: :btree
+    t.index ["dance_teacher_id"], name: "index_workshops_on_dance_teacher_id", using: :btree
     t.index ["party_id"], name: "index_workshops_on_party_id", using: :btree
-    t.index ["teacher_id"], name: "index_workshops_on_teacher_id", using: :btree
   end
 
   add_foreign_key "dance_courses", "dance_teachers"
