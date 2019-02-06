@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :members
   resources :dance_types
   resources :bands
+  resources :dance_courses
 
 end

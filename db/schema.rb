@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190123183858) do
+ActiveRecord::Schema.define(version: 20190206144443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20190123183858) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dance_courses", force: :cascade do |t|
+    t.integer  "dance_teacher_id"
+    t.integer  "dance_id"
+    t.string   "level"
+    t.string   "length"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["dance_id"], name: "index_dance_courses_on_dance_id", using: :btree
+    t.index ["dance_teacher_id"], name: "index_dance_courses_on_dance_teacher_id", using: :btree
   end
 
   create_table "dance_teachers", force: :cascade do |t|
@@ -72,8 +83,19 @@ ActiveRecord::Schema.define(version: 20190123183858) do
 
   create_table "parties", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "photo"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "program"
+    t.text     "content"
+    t.string   "facebook_event"
+    t.string   "application_form"
+    t.string   "spot"
+    t.string   "bss"
+    t.integer  "dance_course_id"
+    t.index ["dance_course_id"], name: "index_parties_on_dance_course_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,9 +109,24 @@ ActiveRecord::Schema.define(version: 20190123183858) do
 
   create_table "workshops", force: :cascade do |t|
     t.string   "title"
-    t.string   "p"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "photo"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "program"
+    t.text     "content"
+    t.string   "theme"
+    t.string   "facebook_event"
+    t.string   "application_form"
+    t.integer  "dance_id"
+    t.integer  "teacher_id"
+    t.integer  "party_id"
+    t.index ["dance_id"], name: "index_workshops_on_dance_id", using: :btree
+    t.index ["party_id"], name: "index_workshops_on_party_id", using: :btree
+    t.index ["teacher_id"], name: "index_workshops_on_teacher_id", using: :btree
   end
 
+  add_foreign_key "dance_courses", "dance_teachers"
+  add_foreign_key "dance_courses", "dances"
 end
