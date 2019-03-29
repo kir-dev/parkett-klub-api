@@ -57,6 +57,8 @@ class PartiesController < ApplicationController
         :application_form,
         :spot,
         :bss,
+        :bss_cover,
+        :spot_cover,
         :dance_course_id,
         :dance_id)
     end
