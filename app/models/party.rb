@@ -1,5 +1,7 @@
 class Party < ApplicationRecord
-  belongs_to :dance_course
+  # TODO: find a way for foreign keys to be either valid or null
+
+  belongs_to :dance_course, optional: true
   validates_associated :dance_course
 
   has_many :workshop
