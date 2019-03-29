@@ -35,7 +35,7 @@ class DanceTypesController < ApplicationController
 
   # DELETE /dance_types/1
   def destroy
-    @dance_type_type.destroy
+    @dance_type.destroy
   end
 
   private
