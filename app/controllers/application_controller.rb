@@ -14,4 +14,8 @@ class ApplicationController < ActionController::API
   def authenticate_user!
     head :unauthorized unless logged_in?
   end
+
+  def render_locked_error(model)
+    render json: model.errors, status: :locked
+  end
 end

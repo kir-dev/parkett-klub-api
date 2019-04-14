@@ -1,5 +1,6 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :update, :destroy]
+  before_action :check_references, only: [:destroy]
 
   # GET /parties
   def index
@@ -39,27 +40,33 @@ class PartiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_party
-      @party = Party.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def party_params
-      params.require(:party).permit(
-        :title,
-        :photo,
-        :start_date,
-        :end_date,
-        :program,
-        :content,
-        :facebook_event,
-        :application_form,
-        :spot,
-        :bss,
-        :bss_cover,
-        :spot_cover,
-        :dance_course_id,
-        :dance_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_party
+    @party = Party.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def party_params
+    params.require(:party).permit(
+      :title,
+      :photo,
+      :start_date,
+      :end_date,
+      :program,
+      :content,
+      :facebook_event,
+      :application_form,
+      :spot,
+      :bss,
+      :bss_cover,
+      :spot_cover,
+      :dance_course_id
+    )
+  end
+
+  def check_references
+    set_party
+    render_locked_error(@party) unless @party.workshop.count.zero?
+  end
 end

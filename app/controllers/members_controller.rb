@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :update, :destroy]
+  before_action :check_references, only: [:destroy]
 
   # GET /members
   def index
@@ -39,13 +40,18 @@ class MembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_member
-      @member = Member.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def member_params
-      params.require(:member).permit(:name, :email, :position, :description, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def member_params
+    params.require(:member).permit(:name, :email, :position, :description, :image)
+  end
+
+  def check_references
+    render_locked_error(@member) unless @member.user.count.zero?
+  end
 end

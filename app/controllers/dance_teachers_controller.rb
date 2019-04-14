@@ -1,5 +1,6 @@
 class DanceTeachersController < ApplicationController
   before_action :set_dance_teacher, only: [:show, :update, :destroy]
+  prepend_before_action :check_references, only: [:destroy]
 
   # GET /dance_teachers
   def index
@@ -39,13 +40,19 @@ class DanceTeachersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dance_teacher
-      @dance_teacher = DanceTeacher.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def dance_teacher_params
-      params.require(:dance_teacher).permit(:name, :url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dance_teacher
+    @dance_teacher = DanceTeacher.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def dance_teacher_params
+    params.require(:dance_teacher).permit(:name, :url)
+  end
+
+  def check_references
+    set_dance_teacher
+    render_locked_error(@dance_teacher) unless @dance_teacher.dance_course.count.zero? && @dance_teacher.workshop.count.zero?
+  end
 end
