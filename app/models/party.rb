@@ -5,12 +5,8 @@ class Party < ApplicationRecord
   has_many :workshop
 
   def dance_course_soundness
-    if dance_course_id.present? && !DanceCourse.exists?(dance_course_id)
-      add_invalid_error :dance_course_id
-    end
-  end
+    return unless dance_course_id.present? && !DanceCourse.exists?(dance_course_id)
 
-  def add_invalid_error(id)
-    errors.add id, 'is invalid'
+    add_invalid_error :dance_course_id
   end
 end

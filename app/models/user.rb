@@ -7,8 +7,4 @@ class User < ApplicationRecord
 
     add_invalid_error :member_id
   end
-
-  def add_invalid_error(id)
-    errors.add id, 'is invalid'
-  end
 end
