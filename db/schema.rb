@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190429071615) do
+ActiveRecord::Schema.define(version: 20190429193734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20190429071615) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bands_parties", force: :cascade do |t|
+    t.integer "band_id"
+    t.integer "party_id"
+    t.index ["band_id"], name: "index_bands_parties_on_band_id", using: :btree
+    t.index ["party_id"], name: "index_bands_parties_on_party_id", using: :btree
   end
 
   create_table "dance_courses", force: :cascade do |t|
@@ -138,6 +145,8 @@ ActiveRecord::Schema.define(version: 20190429071615) do
     t.index ["party_id"], name: "index_workshops_on_party_id", using: :btree
   end
 
+  add_foreign_key "bands_parties", "bands"
+  add_foreign_key "bands_parties", "parties"
   add_foreign_key "dance_courses", "dance_teachers"
   add_foreign_key "dance_courses", "dances"
   add_foreign_key "djs_parties", "djs"

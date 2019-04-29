@@ -6,6 +6,8 @@ class Party < ApplicationRecord
 
   has_and_belongs_to_many :djs
 
+  has_and_belongs_to_many :bands
+
   def dance_course_soundness
     return unless dance_course_id.present? && !DanceCourse.exists?(dance_course_id)
 

@@ -17,9 +17,10 @@ class PartiesController < ApplicationController
   def create
     @party = Party.new(party_params)
     set_djs
+    set_bands
 
     if @party.save
-      render json: @party, status: :created, location: @party
+      render :show, status: :created, location: @party
     else
       render json: @party.errors, status: :unprocessable_entity
     end
@@ -28,8 +29,10 @@ class PartiesController < ApplicationController
   # PATCH/PUT /parties/1
   def update
     set_djs
+    set_bands
+
     if @party.update(party_params)
-      render json: @party
+      render :show
     else
       render json: @party.errors, status: :unprocessable_entity
     end
@@ -63,7 +66,8 @@ class PartiesController < ApplicationController
       :bss_cover,
       :spot_cover,
       :dance_course_id,
-      dj_ids: []
+      dj_ids: [],
+      band_ids: []
     )
   end
 
@@ -76,5 +80,11 @@ class PartiesController < ApplicationController
     return unless params[:dj_ids]
 
     @party.djs = Dj.where(id: params[:dj_ids])
+  end
+
+  def set_bands
+    return unless params[:band_ids]
+
+    @party.bands = Band.where(id: params[:band_ids])
   end
 end
