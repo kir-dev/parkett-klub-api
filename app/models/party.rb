@@ -4,6 +4,8 @@ class Party < ApplicationRecord
 
   has_many :workshop
 
+  has_and_belongs_to_many :djs
+
   def dance_course_soundness
     return unless dance_course_id.present? && !DanceCourse.exists?(dance_course_id)
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190414173307) do
+ActiveRecord::Schema.define(version: 20190429071615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,13 @@ ActiveRecord::Schema.define(version: 20190414173307) do
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "djs_parties", force: :cascade do |t|
+    t.integer "dj_id"
+    t.integer "party_id"
+    t.index ["dj_id"], name: "index_djs_parties_on_dj_id", using: :btree
+    t.index ["party_id"], name: "index_djs_parties_on_party_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -133,5 +140,7 @@ ActiveRecord::Schema.define(version: 20190414173307) do
 
   add_foreign_key "dance_courses", "dance_teachers"
   add_foreign_key "dance_courses", "dances"
+  add_foreign_key "djs_parties", "djs"
+  add_foreign_key "djs_parties", "parties"
   add_foreign_key "users", "members"
 end

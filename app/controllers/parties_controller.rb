@@ -11,12 +11,12 @@ class PartiesController < ApplicationController
 
   # GET /parties/1
   def show
-    render json: @party
   end
 
   # POST /parties
   def create
     @party = Party.new(party_params)
+    set_djs
 
     if @party.save
       render json: @party, status: :created, location: @party
@@ -27,6 +27,7 @@ class PartiesController < ApplicationController
 
   # PATCH/PUT /parties/1
   def update
+    set_djs
     if @party.update(party_params)
       render json: @party
     else
@@ -48,7 +49,7 @@ class PartiesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def party_params
-    params.require(:party).permit(
+    params.permit(
       :title,
       :photo,
       :start_date,
@@ -61,12 +62,19 @@ class PartiesController < ApplicationController
       :bss,
       :bss_cover,
       :spot_cover,
-      :dance_course_id
+      :dance_course_id,
+      dj_ids: []
     )
   end
 
   def check_references
     set_party
     render_locked_error(@party) unless @party.workshop.count.zero?
+  end
+
+  def set_djs
+    return unless params[:dj_ids]
+
+    @party.djs = Dj.where(id: params[:dj_ids])
   end
 end
