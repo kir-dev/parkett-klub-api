@@ -58,7 +58,8 @@ class WorkshopsController < ApplicationController
         :application_form,
         :party_id,
         :dance_id,
-        :dance_teacher_id
+        :dance_teacher_id,
+        :dance_type_id
       )
     end
 end
