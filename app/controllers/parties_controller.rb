@@ -66,6 +66,7 @@ class PartiesController < ApplicationController
       :bss_cover,
       :spot_cover,
       :dance_course_id,
+      :dance_type_id,
       dj_ids: [],
       band_ids: []
     )
