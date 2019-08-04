@@ -4,7 +4,7 @@ class MembersController < ApplicationController
 
   # GET /members
   def index
-    @members = Member.all
+    @members = Member.order(:name)
 
     render json: @members
   end
