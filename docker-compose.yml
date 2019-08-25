@@ -1,0 +1,45 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${DATABASE_USERNAME}
+      - POSTGRES_USERNAME${DATABASE_PASSWORD}
+    volumes:
+      - database_folder:/var/lib/postgresql/data/pgdata
+    restart: always
+    networks:
+      - parkett_network
+  web:
+    build: .
+    command: rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_ENV=production
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_USER=${DATABASE_USERNAME}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - public_folder:/app/public
+    ports:
+      - "3443:3000"
+    networks:
+      - parkett_network
+    depends_on:
+      - postgres
+networks:
+  parkett_network:
+
+# Add your volumes
+volumes:
+  public_folder:
+    external:
+      name: parkett_public
+  database_folder:
+    external:
+      name: parkett_database
