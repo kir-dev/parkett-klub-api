@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: parkett-klub-api_production
-  username: parkett-klub-api
-  password: <%= ENV['PARKETT-KLUB-API_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+
