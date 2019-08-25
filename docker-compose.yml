@@ -4,7 +4,7 @@ services:
     image: postgres:11
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_PASSWORD=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_USERNAME=${DATABASE_USERNAME}
     volumes:
       - database_folder:/var/lib/postgresql/data/pgdata
