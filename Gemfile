@@ -22,7 +22,7 @@ gem 'rack-cors'
 
 gem 'faraday', '~> 0.11'
 
-gem 'jwt', '~> 1.5'
+gem 'jwt', '~> 2.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
