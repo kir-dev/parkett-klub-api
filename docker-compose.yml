@@ -15,6 +15,13 @@ services:
     build: .
     command: rails s -p 3000 -b '0.0.0.0'
     environment:
+      - CLIENT_URL=${CLIENT_URL}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - ACCESS_TOKEN_URL=${ACCESS_TOKEN_URL}
+      - USER_INFO_URL=${USER_INFO_URL}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_ENV=production
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
@@ -27,7 +34,7 @@ services:
     volumes:
       - public_folder:/app/public
     ports:
-      - "3443:3000"
+      - "3444:3000"
     networks:
       - parkett_network
     depends_on:
