@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 
-gem 'faraday', '~> 0.17'
+gem 'faraday', '~> 1.3'
 
 gem 'jwt', '~> 2.2'
 
